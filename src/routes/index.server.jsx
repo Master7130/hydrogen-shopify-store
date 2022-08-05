@@ -7,7 +7,7 @@ import {
 import { Suspense } from "react";
 
 import Layout from "../components/Layout.server";
-import CollectionsPreview from "../components/CollectionsPreview";
+import CollectionsPreview from "../components/CollectionsPreview.server";
 
 export default function Home() {
   return (

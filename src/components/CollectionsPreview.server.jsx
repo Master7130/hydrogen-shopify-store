@@ -1,7 +1,7 @@
 import { useShopQuery, CacheLong, gql, Seo } from "@shopify/hydrogen";
 import { Suspense } from "react";
 
-// import ProductCard from "./ProductCard.server";
+import ProductCard from "./ProductCard.server";
 
 function CollectionsPreview() {
   const {
@@ -17,11 +17,11 @@ function CollectionsPreview() {
         <div>
           {collections.nodes.map((collection, key) => {
             return (
-              <div key={key}>
+              <div key={key} className="w-[10%]">
                 <h1 className="text-2xl">{collection.title}</h1>
-                {/* {collection.products.nodes.map((product, key) => {
-                  <ProductCard handle={product.handle} key={key} />;
-                })} */}
+                {collection.products.nodes.map((product, key) => {
+                  return <ProductCard handle={product.handle} key={key} />;
+                })}
               </div>
             );
           })}

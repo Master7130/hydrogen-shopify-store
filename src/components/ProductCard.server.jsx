@@ -1,4 +1,4 @@
-import { Image, useShopQuery, gql } from "@shopify/hydrogen";
+import { Image, useShopQuery, gql, CacheLong } from "@shopify/hydrogen";
 
 function ProductCard({ handle }) {
   const {
@@ -13,7 +13,24 @@ function ProductCard({ handle }) {
 
   return (
     <div>
-      {/* <div>{productByHandle.featuredImage.url}</div> */}
+      <div className="w-56 aspect-[7/5]">
+        <Image
+          className="aspect-[7/5] w-full object-cover fadeIn"
+          widths={[320]}
+          sizes="320px"
+          loaderOptions={{
+            crop: "center",
+            width: 320,
+            height: 400,
+          }}
+          data={productByHandle.featuredImage}
+          alt={`Picture of ${productByHandle.title}`}
+        />
+      </div>
+      <div className="flex flex-row justify-between">
+        <h3>{productByHandle.title}</h3>
+        <h5>{productByHandle.priceRange.minVariantPrice.amount}</h5>
+      </div>
     </div>
   );
 }
@@ -29,6 +46,11 @@ const PRODUCT_CARD_QUERY = gql`
       description
       handle
       title
+      priceRange {
+        minVariantPrice {
+          amount
+        }
+      }
     }
   }
 `;
