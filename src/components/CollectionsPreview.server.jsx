@@ -1,4 +1,4 @@
-import { useShopQuery, CacheLong, gql, Seo } from "@shopify/hydrogen";
+import { useShopQuery, CacheLong, gql, Seo, Link } from "@shopify/hydrogen";
 import { Suspense } from "react";
 
 import ProductCard from "./ProductCard.server";
@@ -17,7 +17,7 @@ function CollectionsPreview() {
         <div>
           {collections.nodes.map((collection, key) => {
             return (
-              <div key={key} className="w-[10%]">
+              <div key={key} className="w-[20%]">
                 <h1 className="text-2xl">{collection.title}</h1>
                 {collection.products.nodes.map((product, key) => {
                   return <ProductCard handle={product.handle} key={key} />;
