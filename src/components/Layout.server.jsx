@@ -1,9 +1,4 @@
-import {
-  useShopQuery,
-  CacheLong,
-  gql,
-  Seo,
-} from "@shopify/hydrogen";
+import { useShopQuery, CacheLong, gql, Seo } from "@shopify/hydrogen";
 import { Suspense } from "react";
 import Nav from "./Nav.server";
 
@@ -27,7 +22,9 @@ function Layout({ children }) {
         />
       </Suspense>
       <Nav name={shop.name} />
-      {children}
+      <main>
+        <Suspense>{children}</Suspense>
+      </main>
     </>
   );
 }
