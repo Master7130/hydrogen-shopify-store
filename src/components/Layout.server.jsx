@@ -22,7 +22,7 @@ function Layout({ children }) {
         />
       </Suspense>
       <Nav name={shop.name} />
-      <main>
+      <main className="mx-16">
         <Suspense>{children}</Suspense>
       </main>
     </>

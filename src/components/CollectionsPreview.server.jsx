@@ -1,4 +1,4 @@
-import { useShopQuery, CacheLong, gql, Seo, Link } from "@shopify/hydrogen";
+import { useShopQuery, CacheLong, gql } from "@shopify/hydrogen";
 import { Suspense } from "react";
 
 import ProductCard from "./ProductCard.server";
@@ -11,17 +11,21 @@ function CollectionsPreview() {
     cache: CacheLong(),
   });
 
+  console.log(collections);
+
   return (
     <>
       <Suspense>
-        <div>
+        <div className="w-fit space-y-10">
           {collections.nodes.map((collection, key) => {
             return (
-              <div key={key} className="w-[20%]">
-                <h1 className="text-2xl">{collection.title}</h1>
-                {collection.products.nodes.map((product, key) => {
-                  return <ProductCard handle={product.handle} key={key} />;
-                })}
+              <div key={key} className="w-[25%]">
+                <h1 className="text-3xl font-semibold">{collection.title}</h1>
+                <div className="flex flex-row w-auto space-x-32">
+                  {collection.products.nodes.map((product, key) => {
+                    return <ProductCard handle={product.handle} key={key} />;
+                  })}
+                </div>
               </div>
             );
           })}
@@ -35,7 +39,7 @@ export default CollectionsPreview;
 
 const COLLECTIONS_PREVIEW_QUERY = gql`
   query {
-    collections(first: 2) {
+    collections(first: 4) {
       nodes {
         title
         products(first: 3) {

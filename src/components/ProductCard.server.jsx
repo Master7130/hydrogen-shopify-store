@@ -12,18 +12,11 @@ function ProductCard({ handle }) {
   });
 
   return (
-    <div className="space-x-10">
+    <div className="w-max">
       <Link to={`/products/${handle}`}>
-        <div className="w-fit aspect-[7/5]">
+        <div className="w-fit">
           <Image
-            className="aspect-[7/5] w-full object-cover fadeIn"
-            widths={[320]}
-            sizes="320px"
-            loaderOptions={{
-              crop: "center",
-              width: 320,
-              height: 400,
-            }}
+            className="w-full object-cover"
             data={productByHandle.featuredImage}
             alt={`Picture of ${productByHandle.title}`}
           />
@@ -44,6 +37,9 @@ const PRODUCT_CARD_QUERY = gql`
     productByHandle(handle: $handle) {
       featuredImage {
         url
+        width
+        height
+        altText
       }
       description
       handle
