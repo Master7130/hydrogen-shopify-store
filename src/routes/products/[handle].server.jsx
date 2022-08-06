@@ -22,9 +22,13 @@ function Product({ params }) {
     },
   });
 
+  console.log(productByHandle.variants);
+
   return (
     <Layout>
-      <Details product={productByHandle} />
+      <div className="h-screen">
+        <Details product={productByHandle} />
+      </div>
     </Layout>
   );
 }
@@ -32,10 +36,44 @@ function Product({ params }) {
 export default Product;
 
 const PRODUCT_QUERY = gql`
-  query query($handle: String!) {
+  query Product($handle: String!) {
     productByHandle(handle: $handle) {
       title
       description
+      featuredImage {
+        url
+      }
+      variants(first: 100) {
+        nodes {
+          id
+          availableForSale
+          compareAtPriceV2 {
+            amount
+            currencyCode
+          }
+          selectedOptions {
+            name
+            value
+          }
+          image {
+            id
+            url
+            altText
+            width
+            height
+          }
+          priceV2 {
+            amount
+            currencyCode
+          }
+          sku
+          title
+          unitPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
     }
   }
 `;
